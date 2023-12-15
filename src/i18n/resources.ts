@@ -20,8 +20,10 @@ const resources = {
       noCorrelation: "无相关",
       resultDescription: `
 计算结果:
-  \n相关性: <%= correlation %>
-  \n相关系数: <%= coefficient %>`,
+    
+相关性: <%= correlation %>
+
+相关系数: <%= coefficient %>`,
       description: `
 > #### 相关系数:
 > 相关系数是一个数字，用来描述两个事物之间的关系。这个数字在-1到1之间变化。
@@ -51,8 +53,10 @@ const resources = {
       noCorrelation: "No Correlation",
       resultDescription: `
 Result:
-  Correlation: {{correlation}}
-  Coefficient: {{coefficient}}`,
+
+Correlation: <%= correlation %>
+
+Coefficient: <%= coefficient %>`,
       description: `
 > #### Correlation Coefficient:
 > The correlation coefficient is a number used to describe the relationship between two things. This number varies between -1 and 1.
