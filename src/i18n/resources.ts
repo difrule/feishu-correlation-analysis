@@ -18,12 +18,7 @@ const resources = {
       moderateNegativeCorrelation: "中等负相关",
       weakNegativeCorrelation: "弱负相关",
       noCorrelation: "无相关",
-      resultDescription: `
-计算结果:
-    
-相关性: <%= correlation %>
-
-相关系数: <%= coefficient %>`,
+      resultDescription: `<%= coefficient %>(<%= correlation %>)`,
       description: `
 > #### 相关系数:
 > 相关系数是一个数字，用来描述两个事物之间的关系。这个数字在-1到1之间变化。
@@ -51,12 +46,7 @@ const resources = {
       moderateNegativeCorrelation: "Moderate Negative Correlation",
       weakNegativeCorrelation: "Weak Negative Correlation",
       noCorrelation: "No Correlation",
-      resultDescription: `
-Result:
-
-Correlation: <%= correlation %>
-
-Coefficient: <%= coefficient %>`,
+      resultDescription: `<%= coefficient %>(<%= correlation %>)`,
       description: `
 > #### Correlation Coefficient:
 > The correlation coefficient is a number used to describe the relationship between two things. This number varies between -1 and 1.

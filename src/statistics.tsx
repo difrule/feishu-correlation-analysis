@@ -23,23 +23,37 @@ export async function calculate(
   const independents = getFieldNumberValues(records, independentId);
   const dependents = getFieldNumberValues(records, dependentId);
 
-  let coefficient: number;
-  switch (method) {
-    case Pearson:
-      coefficient = pearsonCorrelation(independents, dependents);
-      break;
-    case Spearman:
-      coefficient = spearmanCorrelation(independents, dependents);
-      break;
-    default:
-      throw new Error("unknown method");
-  }
+  return getCorrelationDesc(independents, dependents, method, t);
+}
+
+function getCorrelationDesc(
+  independents: number[],
+  dependents: number[],
+  method: string,
+  t: TFunction<"translation", undefined>
+) {
+  let coefficient = calculateCoefficient(independents, dependents, method);
   coefficient = parseFloat(coefficient.toFixed(2));
-  const correlation = getCofficient(coefficient, t);
+  const correlation = getCorrelation(coefficient, t);
   return _.template(t("resultDescription"))({ correlation, coefficient });
 }
 
-function getCofficient(
+function calculateCoefficient(
+  independents: number[],
+  dependents: number[],
+  method: string
+) {
+  switch (method) {
+    case Pearson:
+      return pearsonCoefficient(independents, dependents);
+    case Spearman:
+      return spearmanCoefficient(independents, dependents);
+    default:
+      throw new Error("unknown method");
+  }
+}
+
+function getCorrelation(
   correlation: number,
   t: TFunction<"translation", undefined>
 ) {
@@ -88,17 +102,17 @@ async function getAllRecords(
   return records;
 }
 
-function pearsonCorrelation(x: Array<number>, y: Array<number>) {
+function pearsonCoefficient(x: Array<number>, y: Array<number>) {
   const covariance = stats.sampleCovariance(x, y);
   const stdX = stats.standardDeviation(x);
   const stdY = stats.standardDeviation(y);
   return covariance / (stdX * stdY);
 }
 
-function spearmanCorrelation(x: Array<number>, y: Array<number>) {
+function spearmanCoefficient(x: Array<number>, y: Array<number>) {
   const xRank = rankArray(x);
   const yRank = rankArray(y);
-  return pearsonCorrelation(xRank, yRank);
+  return pearsonCoefficient(xRank, yRank);
 }
 
 function rankArray(data: number[]): number[] {
