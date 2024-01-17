@@ -19,11 +19,16 @@ const resources = {
       weakNegativeCorrelation: "弱负相关",
       noCorrelation: "无相关",
       resultDescription: `<%= coefficient %>(<%= correlation %>)`,
+      tableTitle: "自变量\\因变量",
+      tableName: "相关系数矩阵",
+      notEnoughRecords: "至少需要两条记录",
       description: `
 > #### 相关系数:
 > 相关系数是一个数字，用来描述两个事物之间的关系。这个数字在-1到1之间变化。
 >
-> 如果是1，那就说明这两个事物非常相关，一个增加，另一个也增加。如果是-1，那就说明一个增加，另一个减少。如果是0，那就说明这两个事物之间没有关系。`,
+> 如果是1，那就说明这两个事物非常相关，一个增加，另一个也增加。如果是-1，那就说明一个增加，另一个减少。如果是0，那就说明这两个事物之间没有关系。
+>
+> 注意：相关性不代表因果关系。例如夏天的时候，冰淇淋的销量和空调的销量都会增加，但是这并不代表冰淇淋的销量增加导致了空调的销量增加。`,
     },
   },
   en: {
@@ -47,11 +52,16 @@ const resources = {
       weakNegativeCorrelation: "Weak Negative Correlation",
       noCorrelation: "No Correlation",
       resultDescription: `<%= coefficient %>(<%= correlation %>)`,
+      tableTitle: "Independent Variable\\Dependent Variable",
+      tableName: "Correlation Coefficient Matrix",
+      notEnoughRecords: "At least two records are required",
       description: `
 > #### Correlation Coefficient:
 > The correlation coefficient is a number used to describe the relationship between two things. This number varies between -1 and 1.
 >
-> If it is 1, it means that these two things are very related, one increases and the other also increases. If it is -1, it means that when one increases, the other decreases. If it is 0, it means that there is no relationship between these two things.`,
+> If it is 1, it means that these two things are very related, one increases and the other also increases. If it is -1, it means that when one increases, the other decreases. If it is 0, it means that there is no relationship between these two things.
+>
+> Note: Correlation does not mean causation. For example, in summer,  the sales of ice cream and the sales of air conditioners will increase, but this does not mean that the increase in ice cream sales has led to an increase in air conditioner sales.`,
     },
   },
 };

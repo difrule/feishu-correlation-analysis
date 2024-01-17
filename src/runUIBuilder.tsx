@@ -17,16 +17,6 @@ export default async function (
           label: t("selectView"),
           sourceTable: "table",
         }),
-        form.fieldSelect("independentVariable", {
-          label: t("independentVariable"),
-          sourceTable: "table",
-          filterByTypes: [FieldType.Number],
-        }),
-        form.fieldSelect("dependentVariable", {
-          label: t("dependentVariable"),
-          sourceTable: "table",
-          filterByTypes: [FieldType.Number],
-        }),
         form.select("algorithm", {
           label: t("selectAlgorithm"),
           options: [
@@ -62,8 +52,6 @@ function newCalculate(
     const {
       table,
       view,
-      independentVariable,
-      dependentVariable,
       algorithm,
     }: {
       table: optoin;
@@ -72,26 +60,12 @@ function newCalculate(
       dependentVariable: optoin;
       algorithm: string;
     } = params.values as any;
-    if (
-      !table ||
-      !view ||
-      !independentVariable ||
-      !dependentVariable ||
-      !algorithm
-    ) {
+    if (!table || !view || !algorithm) {
       uiBuilder.message.error(t("mustSelectAllOptions"));
       return;
     }
     uiBuilder.showLoading(t("calculating"));
-    const result = await calculate(
-      table.id,
-      view.id,
-      independentVariable.id,
-      dependentVariable.id,
-      algorithm,
-      t
-    );
-    uiBuilder.markdown(result);
+    await calculate(table.id, view.id, algorithm, t);
     uiBuilder.markdown(t("description"));
     uiBuilder.hideLoading();
   };
