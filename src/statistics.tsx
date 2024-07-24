@@ -51,8 +51,11 @@ export async function calculate(
   // calculate correlation
   for (const fieldPairs of matrix) {
     for (const fieldPair of fieldPairs) {
-      const independents = getFieldNumberValues(records, fieldPair[0]);
-      const dependents = getFieldNumberValues(records, fieldPair[1]);
+      const [independents, dependents] = getFieldNumberValues(
+        records,
+        fieldPair[0],
+        fieldPair[1]
+      );
       const desc = getCorrelationDesc(independents, dependents, method, t);
       fieldPair[2] = desc;
     }
@@ -84,6 +87,7 @@ async function createResultMatrixTable(
   } catch (error) {
     console.log("old table not exist");
   }
+
   // add table
   const tableResult = await bitable.base.addTable({
     name: tableName,
@@ -160,18 +164,26 @@ function getCorrelation(
   }
 }
 
-function getFieldNumberValues(records: IRecord[], fieldId: string) {
-  const values = new Array<number>();
+function getFieldNumberValues(
+  records: IRecord[],
+  fieldId1: string,
+  fieldId2: string
+) {
+  const values1 = new Array<number>();
+  const values2 = new Array<number>();
   for (const record of records) {
     if (record.recordId === undefined) {
+      console.log("recordId is undefined");
       continue;
     }
-    const value = record.fields[fieldId];
-    if (checkers.isNumber(value)) {
-      values.push(value);
+    const value1 = record.fields[fieldId1];
+    const value2 = record.fields[fieldId2];
+    if (checkers.isNumber(value1) && checkers.isNumber(value2)) {
+      values1.push(value1 as number);
+      values2.push(value2 as number);
     }
   }
-  return values;
+  return [values1, values2];
 }
 
 async function getAllRecords(table: ITable, viewId: string) {
